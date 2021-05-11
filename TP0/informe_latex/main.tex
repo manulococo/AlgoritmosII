@@ -25,7 +25,6 @@
 \graphicspath{ {imagenes/} } %no es neceario todo el path en graficos
 \setlength{\headheight}{28pt}
 
-
 % \usepackage{amsmath}%modificaciÃ³n de numeraciÃ³n de ecuaciones
 % \numberwithin{equation}{section} %tipo de numeraciÃ³n capitulo.ecuacion
 
@@ -36,32 +35,35 @@
 \renewcommand{\arraystretch}{1.5}%cambia el interlineado de las tablas
 
 %COMANDOS DE INFORMACION DE MATERIA
-\newcommand{\codigoMateria}{62.05 y 82.03} %una "macro" para definir codigo de materia
-\newcommand{\nombreMateria}{Física III Curso 1: Dr. Ozols}
-\newcommand{\nroTP}{3}
+\newcommand{\codigoMateria}{75.04 y 95.12} %una "macro" para definir codigo de materia
+\newcommand{\nombreMateria}{Algoritmos y Programación II - Curso P. Calvo}
+\newcommand{\nroTP}{0}
 \newcommand{\descripcionTP}{Curvas características del transistor TBJ BC337}
 
-\newcommand{\tituloTP}{Entrega N° \nroTP}
+\newcommand{\tituloTP}{Trabajo Práctico \nroTP}
+\newcommand{\subtituloTP}{Programación C++}
 \newcommand{\facultad}{Facultad de Ingeniería}
 \newcommand{\universidad}{Universidad de Buenos Aires}
 \newcommand{\cuatrimestre}{Primer Cuatrimestre 2021}
 
 %COMANDOS DE DATOS PERSONALES
-\newcommand{\nombrealan}{Pomato, Alan}
-\newcommand{\padronalan}{94721}
-\newcommand{\mailalan}{apomato@fi.uba.ar}
+
+
+\newcommand{\nombrechristian}{Mesquida, Christian}
+\newcommand{\padronchristian}{96148}
+\newcommand{\mailchristian}{cmesquida@fi.uba.ar}
 
 \newcommand{\nombrejorge}{Clavijo, Jorge}
 \newcommand{\padronjorge}{95485}
 \newcommand{\mailjorge}{joclavijo@fi.uba.ar}
 
-\newcommand{\nombrekevin}{Grattan, Kevin}
-\newcommand{\padronkevin}{100487}
-\newcommand{\mailkevin}{kgrattanp@fi.uba.ar}
+\newcommand{\nombremanuel}{Lo Coco, Manuel}
+\newcommand{\padronmanuel}{103938}
+\newcommand{\mailmanuel}{mlococo@fi.uba.ar}
 
-\newcommand{\nombrelautaro}{De Lucia, Lautaro }
-\newcommand{\padronlautaro}{100203}
-\newcommand{\maillautaro}{ldelucia@fi.uba.ar }
+\newcommand{\nombrenicolas}{Strangis, Nicolás}
+\newcommand{\padronnicolas}{96407}
+\newcommand{\mailnicolas}{nstrangis@fi.uba.ar}
 
 %COMANDOS DE VARIABLES GLOBALES 
 \newcommand{\lambdaprima}{\lambda^{\prime}}
@@ -85,162 +87,40 @@
 \raggedbottom %evita espacios en blancos grandes entre imagenes y textos
 
 \begin{document}
-
-%PORTADA
-%\vspace*{-3mm}%esto, no entiendo como funciona pero hace lo que quiero (dejar un pequeÃ±o espacio)
-\begin{center}
-\today\\
-\LARGE{\textsc{ \tituloTP }}\\[.3cm]
-%\HRule \\[0.1cm]
-%\LARGE{\textbf{\descripcionTP}}\\[0.01cm]
-\HRule\\[-0.1cm]
-\end{center}
-
-\begin{tabbing}
-	Autores: \textit{Nombre, Padrón, Email:}	
+	
+	%PORTADA
+	%\vspace*{-3mm}%esto, no entiendo como funciona pero hace lo que quiero (dejar un pequeÃ±o espacio)
+	\begin{center}
+		\today\\
+		\LARGE{\textsc{ \tituloTP }}\\
+		\Large{\textsc{\subtituloTP}}\\[.3cm]
+		%\HRule \\[0.1cm]
+		%\LARGE{\textbf{\descripcionTP}}\\[0.01cm]
+		\HRule\\[-0.1cm]
+	\end{center}
+	
+	\begin{tabbing}
+		Autores: \textit{Nombre, Padrón, Email:}	
 		\hspace{0.5cm} \= \hspace{2cm} \= \hspace{-2cm} \= \\[.2cm]		
-		\hspace{1.2cm}  \nombrealan   	\>	 \padronalan\>  \mailalan\\[.1cm]
-        \hspace{1.2cm}  \nombrekevin   \> 	 \padronkevin\> \mailkevin\\[.1cm]
-         \hspace{1.2cm} \nombrejorge    \> 	 \padronjorge\>  \mailjorge\\[.1cm]
-                \hspace{1.2cm} \nombrelautaro    \> 	 \padronlautaro\>  \maillautaro\\[-.4cm]
-
-\end{tabbing}
-\HRule
-
-%****Resolución************
-\section*{Resolución}
-
-	\begin{enumerate}[label=\arabic* , font=\bfseries] 
+		\hspace{1.2cm}  \nombrechristian   	\>	 \padronchristian\>  \mailchristian\\[.1cm]
+		\hspace{1.2cm}  \nombremanuel   \> 	 \padronmanuel\> \mailmanuel\\[.1cm]
+		\hspace{1.2cm} \nombrejorge    \> 	 \padronjorge\>  \mailjorge\\[.1cm]
+		\hspace{1.2cm} \nombrenicolas    \> 	 \padronnicolas\>  \mailnicolas\\[-.4cm]
+		
+	\end{tabbing}
+	\HRule
+	%****Resolución************
 	
-		\item \label{ej_1}Se acelera un electrón sometiéndolo a una diferencia de potencial de $60$ V.
-			
-			\begin{enumerate}[label=(\alph*), font=\bfseries]
-				
-				\item ¿Cuánto valen su impulso lineal y su velocidad?
-					\vspace{-1.5mm}
-					\paragraph{}La energía cinética para una partícula cargada y acelerada por una diferencia de potencial se obtiene de la electroestática y es igual a $K=q\cdot V= 60$ eV, esta energía es mucho menor que la energía en reposo del electrón, por lo tanto, se tiene un eléctron no relativista y se puede usar las expresiones de mecánica clásica.
-					
-						\begin{equation}\label{eqn:e_cinetica_clasica}
-							K=\frac{1}{2}mv^2		
-						\end{equation}
-				
-				De la ecuación \ref{eqn:e_cinetica_clasica} se obtiene la velocidad $v=4.6\cdot 10^6\  \frac{\text{m}}{\text{s}}$, y su momento lineal $p=mv=4.2\cdot 10^{-24}\ \frac{\text{kg}\cdot \text{m}}{\text{s}}$
-				
-				\bigskip
-				
-						
-				\item ¿Cuánto vale su longitud de onda asociada según la hipótesis de De Broglie?
-		
-					\paragraph{} De Broglie afirma que todo objeto de masa $m$ y cantidad de movimiento $p=mv$ tiene propiedades ondulatorias, la longitud de onda De Broglie está dada por: $\lambda=\frac{h}{p}=0.16$ nm.
-					
-					\bigskip
-					
 	
-				\item Suponiendo que la precisión con la que se conoce su velocidad es un $1.5 \%$  del valor obtenido. ¿Con qué precisión se puede medir la posición del electrón de forma simultánea con su velocidad?
-				
-				
-				\paragraph{} Según el principio de incertidumbre de Heisenberg es básicamente imposible medir, simultáneas, la posición y la cantidad de movimiento de una partícula con una precisión infinita. Las incertidumbres se presentan debido a la estructura cuántica de la materia. El dato de incerteza es la velocidad $\triangle v=0.015 v$ por lo tanto la precisión con la cual se puede medir la posición es:
-					
-					\begin{align*}
-						\triangle x \cdot \triangle p_x \geq&\frac{\hbar}{2} \\
-						\triangle x \geq\frac{\hbar}{2m\triangle v} =& \ 0.84 \text{ nm} \\	 
-					\end{align*} 
-		
-			\end{enumerate}
-			
-		\newpage
-
-		\item \label{ej_2}Se pretende corroborar la hipótesis de De Broglie. Para ello se realiza un experimento donde se incide con electrones con una energía de $K=0.6$ keV sobre $N=10$ rendijas con una separación $d = 62$ nm y se observa un patrón de interferencia.
 	
-			\begin{enumerate}[label=(\alph*), font=\bfseries]
-			
-		
-			
-				\item \label{itm:a}¿A qué ángulos atravesarán las rendijas los electrones con mayor probabilidad? Calcular todos esos máximos que se encuentren dentro de una apertura angular de 2 mrad respecto del máximo central.
-				
-				\paragraph{}Antes de obtener la longitud de onda De Broglie, se revisa si el electrón es relativista. La energía de reposo del electrón es $E_o=511$ KeV, la expresión gamma queda entonces $\gamma = 1 + \frac{K}{Eo} = 1.001 \approxeq 1$ y se verifica que el electrón no es relativista. 
-				
-				\paragraph{}La expresión beta queda $\beta = \sqrt{1-\frac{1}{\gamma^2}}=0.048$ es decir, la velocidad del electrón en el experimento es cerca del $5\%$ la velocidad de la luz, $v=\beta \cdot c_o=1.45\cdot10^7 \frac{\text{m}}{\text{s}}$
-				
-					\begin{equation}\label{eqn:e_lambdaDB_noRelativista}
-						\lambda = \frac{h}{\sqrt{2meV}}=\frac{1.23}{\sqrt{V}} \text{ nm}
-					\end{equation}	
-				
-				\paragraph{}Con la velocidad obtenida se puede calcular el momento lineal del electrón y finalmente la longitud de onda De Broglie, sin embargo, se prefiere usar la ecuación \ref{eqn:e_lambdaDB_noRelativista} en el cual la longitud de onda De Broglie se encuentra expresada en función del valor del potencial que se incide al electrón. Reemplazando $V=600$ se obtiene $\lambda = 0.05$ nm.
-				
-		
-
-				\paragraph{}Se tiene en cuenta el experimento de doble rendija de Young que sirve como prototipo para fenómenos de interferencia que involucran radiación electromagnética. En este experimento, dos rendijas separadas por una distancia d se iluminan mediante una fuente de luz de una sola longitud de onda. La condición para franjas brillantes (interferencia constructiva) es:
-				
-				
-					\begin{equation}\label{eqn:e_angulo_brillante}
-						d\cdot sin(\theta)= m\lambda
-					\end{equation}
-				
-				Se tiene m = $0, \pm1, \pm2 \ ..$ como el número de orden, la franja central brilante que se encuentra en el medio de la pantalla pertenece al máximo de orden m = $0$.
-				
-				Dado que la apertura angular está en el orden de los miliradianes se trabajará con ángulos muy pequeños, por lo tanto, se usa la simplificación $sin(\theta) \simeq \theta < 0\text{.}002$,  se reemplaza en la ecuación \ref{eqn:e_angulo_brillante}
-				 
-					\begin{equation}\label{eqn:e_angulo_m}
-						\theta=\frac{m\lambda}{d}<2\text{ mrad}
-					\end{equation}
-				
-				De la inecuación \ref{eqn:e_angulo_m} se obtiene la condición $m<2.5$ y con esta se calcula el arreglo de ordenes: 
-					\begin{equation*}
-						m = [-2, -1, 0, 1, 2]
-					\end{equation*}
-				Finalmente, se usa la ecuación \ref{eqn:e_angulo_m} para obtener el arreglo de ángulos en radianes en el cual se observan los máximos brillantes. 
-					\begin{equation*}
-						\theta =[-1\text{.}6, \ \  -0\text{.}81,\ \   0,\ \  0\text{.}81\ \  1\text{.}6] \text{ mrad}
-					\end{equation*}
-				
-				\bigskip
-		
-				\item \label{2_b}¿Cómo se podría modificar el experimento para lograr ver a los máximos más separados?
-				
-				\paragraph{}De la ecuación \ref{eqn:e_angulo_m} se tiene la relación de proporcionalidad $\theta \propto \frac{\lambda}{d}$, en la cual, la longitud de onda es directamente proporcional a la locación de los máximos y teniendo en cuenta que la energía que se incide a los electrones es inversamente proporcial a la longituda de onda De Broglie, según se observa en la ecuación \ref{eqn:e_lambdaDB_noRelativista}, se concluye que disminuyendo la energía que se incide a los electrones se logra separar a los máximos.
-				
-				
-				De igual manera, para lograr ver a los máximos más separados se debe disminuir $d$.
-				
-				\newpage
-				
-				\item ¿Cuántos máximos secundarios se observan entre dos máximos principales?
-				
-				\begin{figure}[H]
-					\centering
-					\includegraphics[width=0.8\textwidth]{interferencia3.png} 
-					\caption{Patrón de Interferencia}
-					\label{fig_interferencia}
-				\end{figure}
-			
-				Los máximos secundarios obedecen a  $N-2$ y esto se corrobora en la figura \ref{fig_interferencia} donde se observa 8 máximos secundarios. 
-				
-				$N$ no afecta a la locación de los máximos brillantes $\theta$, pero si, a la intensidad de estos en el eje del término de interferencia, se puede observar este comportamiento en la ecuacion \ref{eqn:e_interferencia} la cual se usa para la figura \ref{fig_interferencia}.
-				
-		
-				
-				\begin{equation}\label{eqn:e_interferencia}
-					I= \frac{sin^2(\frac{N\pi d \sin(\theta)}{\lambda})}{sin^2(\frac{\pi d \sin(\theta)}{\lambda})}
-				\end{equation}
-						
-				
-				\bigskip
-						
-				\item ¿Qué patrón se vería en la pantalla si ahora se introduce un detector de electrones en las rendijas?
-			 
-			 
-			 	
-				 \paragraph{}Se ha calculado los ángulos en los cuales los electrones tienen la intensidad/probabilidad máxima al llegar a la pantalla, por lo tanto el electrón fue afectado por el fenómeno ondular de interferencia, experimentalmente los electrones se detectan como partículas en una mancha localizada sobre la pantalla en algún instante de tiempo, pero la probabilidad de llegada a dicha mancha se determina al encontrar la intensidad de dos ondas que interfieren. Por lo tanto se tiene una  \textbf{naturaleza dual del electrón: onda-partícula.}
-				 
-				 \medskip
-				 
-				 Para que se realice la interferencia se debe aceptar la naturaleza ondular del electrón y esto significa que el electrón está presente en ambas rendijas al mismo tiempo al pasar por ellas.
-				 
-				 \medskip
-				 
-				 Al agregar un observador (detector de electrones en las rendijas) al sistema, se está modificando el experimento a solo observar la naturaleza partícula del electrón, se está restringiendo el modelo dual y el sistema colapsa sobre un estado, por lo tanto, en la pantalla se vería el mismo patrón que si se dispararan partículas macroscópicas.
-				 
-			\end{enumerate}
-	\end{enumerate}
+	
+	\section{Diseño e Implementación}
+	
+	\section{Compilación}
+	
+	\section{Corridas de prueba}
+	\section{Código fuente}
+	
+	
+	
 \end{document}
