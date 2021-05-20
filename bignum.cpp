@@ -63,13 +63,3 @@ for(int i = 0; i < dim; i++)
 
 cout << ", "  << (sign ? "NEGATIVO" : "POSITIVO") << endl;
 }
-
-int main(void)
-{
-    string str;
-    int precision;
-    cin >> str;
-    cin >> precision;
-    bignum a(str, precision);
-    a.emitir_bignum();
-}
