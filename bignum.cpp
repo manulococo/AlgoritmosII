@@ -1,8 +1,4 @@
-#include <iostream>
 #include "bignum.h"
-#include <string>
-
-using namespace std;
 
 bignum::bignum()
 {

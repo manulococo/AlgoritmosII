@@ -1,8 +1,5 @@
-// cmdline - procesamiento de opciones en la l�nea de comando.
 
-#include <string>
-#include <cstdlib>
-#include <iostream>
+
 #include "cmdline.h"
 
 using namespace std;

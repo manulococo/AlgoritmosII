@@ -1,6 +1,7 @@
 #ifndef _CMDLINE_H_INCLUDED_
 #define _CMDLINE_H_INCLUDED_
 
+#include <cstdlib>
 #include <string>
 #include <iostream>
 

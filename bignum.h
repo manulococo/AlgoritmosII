@@ -2,16 +2,14 @@
 #define _BIGNUM_H_INCLUDED_
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <stdio.h>
-//#include <cmdline.h>
 
+using namespace std;
 class bignum
 {
 private:
-	istream *iss_;			// stream de entrada de donde se obtendran los datos de consulta
-    istream *pss_;	        // stream de entrada donde se recibe la precisión
-    ostream *oss_;			// stream de salida en el cual se plasman los resultados 
 	unsigned short *digits;
 	int dim;
 	bool sign;
