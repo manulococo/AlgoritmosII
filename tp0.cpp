@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "bignum.h"
 #include "cmdline.h"
+#include "precisionfija.h"
 
 //#include "IteradorLista.h"
 //#include "Lista.h"
@@ -59,34 +60,30 @@ static option_t options[] = {
     {0, },
 };
 
-static fstream pfs; //-p  precision
-static istream *pss = 0;
-
 static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
 
+static int precision = 5; //por defecto
+
 static void
 opt_precision(string const &arg)
 {
-    // Si el nombre del archivos es "-", usaremos la entrada
-    // estándar. De lo contrario, abrimos un archivo en modo
-    // de lectura.
-    // -p es mandatory
-    if (arg == "-") { //nunca va a pasar, supongo lo borro luego, hacer casos de prueba
-        pss = &cin;
-    } else {
-        pfs.open(arg.c_str(), ios::in);
-        pss = &pfs;
+    //-p es mandatory
+    // Validamos el arg de entrada 
+    // Iteramos sobre el string arg en búsqueda de argumentos no numéricos
+    string::const_iterator it = arg.begin();
+    while(it != arg.end() && std::isdigit(*it))
+        ++it;
+    if (!arg.empty() && it == arg.end()){
+        precision = std::stoi(arg); // transformamos a entero
+        //cout<< "Es numerico"<<endl;
     }
-    
-    // Verificamos que el stream este OK.
-    //
-    if (!pss->good()) {
-        cerr << "cannot open "
+    else{
+        cerr << "La precisión: "
         << arg
-        << "."
+        << " No es un argumento númerico"
         << endl;
         exit(1);
     }
@@ -158,14 +155,15 @@ main(int argc, char * const argv[])
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
     
-    string str;
+    /* string str;
     int precision;
     cin >> str;
     cin >> precision;
     bignum a(str, precision);
     a.emitir_bignum();
-
-
+ */
+    precision_fija precision_(*iss, *oss, &precision);
+    precision_.acumular();
 
     /* distmin<tipo_dato_> distmin_(*iss,*pss,*oss);
     
