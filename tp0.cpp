@@ -77,7 +77,9 @@ static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
 
-static int precision = 100; //incializo con algún valor. 
+// La precision si no es especificada el ejecturar el programa, se ajustará de acuerdo a la dimensión
+// del string que se asigna a bignum
+static precision_t precision;
 
 static void
 opt_precision(string const &arg)
@@ -89,7 +91,8 @@ opt_precision(string const &arg)
     while(it != arg.end() && std::isdigit(*it))
         ++it;
     if (!arg.empty() && it == arg.end()){
-        precision = std::stoi(arg); // transformamos a entero
+        precision.isSet=true;
+        precision.value = std::stoi(arg); // transformamos a entero
         //cout<< "Es numerico"<<endl;
     }
     else{
@@ -154,7 +157,7 @@ opt_output(string const &arg)
 static void
 opt_help(string const &arg)
 {
-    cout << "tp0 [-p file] [-i file] [-o file]"
+    cout << "tp0 [-p precision] [-i file] [-o file]"
     << endl;
     exit(0);
 }
@@ -166,9 +169,8 @@ main(int argc, char * const argv[])
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
 
-    precision_fija precision_(*iss, *oss, &precision);
-    precision_.captura();
-
+    precision_fija precision_(*iss, *oss);
+    precision_.captura(&precision);
     if (iss->bad()) {
         cerr << "cannot read from input stream."
         << endl;

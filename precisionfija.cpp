@@ -4,54 +4,52 @@ using namespace std;
 precision_fija::precision_fija()
 {
 }
-precision_fija::precision_fija(istream &iss, ostream &oss, int *precision){
+precision_fija::precision_fija(istream &iss, ostream &oss){
     iss_ = &iss;
     oss_ = &oss;
-    this->precision = *precision; // precicisón por defecto, se podría usar una deficion global para definirla
 }
 precision_fija::~precision_fija(){
     
 }
-void precision_fija::captura(){
+void precision_fija::captura(precision_t *precision){
     string s; //se almacenará la lína 
     smatch m; // ver regex c++, se almacenará las "captura" realizadas por el regex
 
-    //validacion regex---> https://regex101.com/  consultar: (\b\d+|\-\d+|\+\d+)(\+|\*|\-)(\d+|\-\d+|\+\d+)$
-    regex e ("(\\d+|\\-\\d+|\\+\\d+)(\\+|\\*|\\-)(\\d+|\\-\\d+|\\+\\d+)$"); 
+    //validacion regex---> https://regex101.com/  consultar: ^(\d+|\-\d+|\+\d+)\s*(\+|\*|\-)\s*(\d+|\-\d+|\+\d+)$
+    //\s --> matches any whitespace character (equivalent to [\r\n\t\f\v ])
+    regex e ("^(\\d+|\\-\\d+|\\+\\d+)\\s*(\\+|\\*|\\-)\\s*(\\d+|\\-\\d+|\\+\\d+)$"); 
 
     // Recibo el flujo isstream y lo guarda en un string
     while (getline(*iss_, s)){
         if (s.empty() == true){ // si la linea está vacía,
-                cout<<"Finished program"<<endl;       
+                *oss_<<"Finished program"<<endl;       
                 break;
         }
-        while (std::regex_search (s,m,e)) {
+        if (std::regex_search (s,m,e)) { //true: A match was found within the string.
             //for (auto x:m) std::cout << x << ".."; realiza lo mismo que el for de abajo
             //for (unsigned i=0; i<m.size(); ++i) {
             //    cout << "[" << m[i] << "] ";
             //}
             /////////////////////////////////////////////////////////////////////////////////    
             // m.str(i)
-            // En i=0 se encentra toda el string, i=1 1er bignum, i=2 la operacion, i=3 2do bignum
+            // En i=0 se encuentra toda el string, i=1 1er bignum, i=2 la operacion, i=3 2do bignum
             string a=m.str(1); 
             string b=m.str(3);
 
-            bignum aa(a, precision);
-            bignum bb(b, precision);
-            //bignum c;
-
+            int precision_a = precision->isSet ? precision->value : a.length();
+            int precision_b = precision->isSet ? precision->value : b.length();
+            //cout<<precision_a<<" "<<precision_b<<endl;
+            bignum aa(a, precision_a);
+            bignum bb(b, precision_b);
             switch (m.str(2)[0])
             {
             case '+':
-                //c = aa + bb;
                 *oss_ << aa + bb; 
                 break;
             case '-':
-                //c = aa - bb;
                 *oss_ << aa - bb;
                 break;
             case '*':
-                //c = aa * bb;
                 *oss_ << aa * bb;
                 break;
             default:
@@ -60,6 +58,7 @@ void precision_fija::captura(){
             }
             s = m.suffix().str(); // se reinicia para la proxima captura
          }
+         else *oss_<<"Entry not processed"<<endl;
     } 
     if (iss_->bad()) {
         cerr << "cannot read from input stream."

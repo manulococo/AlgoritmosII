@@ -287,10 +287,15 @@ bignum operator-(const bignum& a, const bignum& b)
     return c;
 }
 std::ostream& operator<<(std::ostream& oss_, const bignum& out){
-	oss_<< (out.sign ? "-" : "");
-    for(int i=out.dim; i!=0; i--){
-		oss_<< out.digits[i-1];
-	}
+	if(out.dim == 0){
+        oss_<<'0';
+    }
+    else{
+        oss_<< (out.sign ? "-" : "");
+        for(int i=out.dim; i!=0; i--){
+		    oss_<< out.digits[i-1];
+	    }
+    }
     oss_<<"\n";
     return oss_;
 }
