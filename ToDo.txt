@@ -1,0 +1,28 @@
+--------ERRORES------------
+Un cero al final del segundo bignum(con el primer bignum anda) tira eror std::bad_array_new_length.
+IMPORTANTE CORREGIR
+std::bad_array_new_length
+ej 5151*115150
+
+PARA LUEGO CORREGIR
+0+0 std::bad_array_new_length
+0*0 std::bad_array_new_length
+515454*0 std::bad_array_new_length
+0*5151 std::bad_array_new_length
+0-0 Este funciona bien!
+
+./test -p 2
+511*11 funcion
+511*111 bad array
+./test --con precision suficiente + es decir por default la dim del string
+
+---------ToDo------------
+Hacer un makefile  c++ cmdline.cpp bignum.cpp precisionfija.cpp tp0.cpp -o test
+
+---------COMMITS---------
+---24/05---
+--Se actualiza el regex para caracteres \s --> matches any whitespace character (equivalent to [\r\n\t\f\v ]) entre operandos y el operador.
+--Se crea un struct precision_t --> Si no se define la precisión por usuario, la precision de el bignum sería su dimensión.
+--Al tener una '\n' en el stream in se termina el programa con un msg en el stream out.
+--Se imprimen lo ceros ya que 51-51 da un bignum de dimension 0, asi que se imprime "0" ---> opcion implementada en std::ostream& operator<<(std::ostream& oss_, const bignum& out)
+--Una operación erronea mandará al stream out el msg "Entry not processed" y continuará el stream in hasta EOF o hasta encontrar '\n' solo en una línea
