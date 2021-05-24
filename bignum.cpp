@@ -57,7 +57,6 @@ for(int i = 0; i < dim; i++)
 
 cout << ", "  << (sign ? "NEGATIVO" : "POSITIVO") << endl;
 }
-
 bignum operator*(const bignum& a, const unsigned short b) 
 {
     bignum resultado(a.dim + 1);
@@ -66,14 +65,16 @@ bignum operator*(const bignum& a, const unsigned short b)
     for (; i < a.dim; )
     {
         unsigned short multi = 0;
-        multi = a.digits[i] * b + carry;
-        resultado.digits[i + 1] = carry % 10;
+        multi = a.digits[i] * b;
+        if(multi + carry > 9)     // Cuando era < 9 le sumaba cero
+            resultado.digits[i] = (multi + carry) % 10;
+        else
+            resultado.digits[i] = multi + carry;
+        resultado.digits[i + 1] = (multi + carry) / 10;
         carry = 0;
-        carry = multi / 10;
+        carry = resultado.digits[i + 1];  // Le asigna el (multi + carry / 10)
         i++;
     }
-
-    resultado.digits[i] = carry;
     return resultado;
 }
 static void copy_array(unsigned short *dest, unsigned short *orig, int n)
@@ -131,13 +132,13 @@ bignum operator+(const bignum& a, const bignum& b)
     delete []bb;
     return c;
 }
-bignum bignum::agregar_ceros(int pos, int n)
+bignum bignum::agregar_ceros(int pos, int n)// Le agrande el vector a (dim+n) xq sino eliminaba los ultimos
 {
-    for (int i = pos - 1; i >= 0; i--)
-        digits[i + n] = digits[i];
-
-    for (int i = 0; i < n; i++)
-        digits[i] = 0;
+    unsigned short *aux = new unsigned short[dim + n]();  
+    copy_array(aux + n, digits, dim);   // le dejo n ceros al principio a aux
+    delete []digits;
+    digits = aux;
+    dim += n;
     return *this;
 }
 bignum operator*(const bignum& a, const bignum& b) 
@@ -145,15 +146,15 @@ bignum operator*(const bignum& a, const bignum& b)
     int largo = a.dim + b.dim;
 
     bignum retorno(largo);
-
-    b.sign == a.sign ? retorno.sign = false : retorno.sign = true;
     for (int k = 0; k < b.dim; k++)
     {
         bignum multi(a.dim + 2 + k);
         multi = a * b.digits[k];
+        multi.sign = false;    // Pongo los dos positivos, sino hace resta en vez de suma cuando hay uno negativo
+        retorno.sign = false;
         retorno = retorno + multi.agregar_ceros(a.dim + 1, k);
     }
-
+    b.sign == a.sign ? retorno.sign = false : retorno.sign = true;
     return retorno;
 }
 bignum& bignum::operator=(const bignum& b)

@@ -1,1 +1,1 @@
-stream de entrada muere en el segundo enter
+-p opcional y no obligatorio, de otra manera usar la dimension del arrelgop como preccison 
