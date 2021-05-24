@@ -13,21 +13,12 @@ class precision_fija
     
     int precision;       // precision de los cálculos a realizarse
     
-
-    // tengo que declarar los dos numeros bignum con los cuales voy a laburar
-    bignum a(std::string&, int); //chequear
-    bignum b(std::string&, int); //chequear
-
+    precision_fija();
 public:
-    
-    precision_fija(); //puede ser privado!
+
     precision_fija(istream &,ostream &,int *);//Constructor con argumento, paso los streams por referencia
     ~precision_fija();
-    
-    void acumular(); //manejo de streams, cambiar nombre luego CAPTURAR
-    void distance();
-    void emite();
-    void Liberar_memoria();
+    void captura(); //manejo de streams, cambiar nombre luego CAPTURAR
 };
 
 #endif

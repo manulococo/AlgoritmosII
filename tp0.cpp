@@ -65,7 +65,7 @@ static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
 
-static int precision = 5; //por defecto
+static int precision = 5; //incializo con algún valor, luego obligatoriamente cambia
 
 static void
 opt_precision(string const &arg)
@@ -151,27 +151,12 @@ opt_help(string const &arg)
 int
 main(int argc, char * const argv[])
 {
-    
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
-    
-    /* string str;
-    int precision;
-    cin >> str;
-    cin >> precision;
-    bignum a(str, precision);
-    a.emitir_bignum();
- */
-    precision_fija precision_(*iss, *oss, &precision);
-    precision_.acumular();
 
-    /* distmin<tipo_dato_> distmin_(*iss,*pss,*oss);
-    
-    distmin_.acumular();
-    distmin_.distance();
-    distmin_.Liberar_memoria(); */
-    
-    
+    precision_fija precision_(*iss, *oss, &precision);
+    precision_.captura();
+
     if (iss->bad()) {
         cerr << "cannot read from input stream."
         << endl;

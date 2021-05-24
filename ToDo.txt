@@ -1,0 +1,1 @@
+stream de entrada muere en el segundo enter
