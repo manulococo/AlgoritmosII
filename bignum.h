@@ -16,33 +16,23 @@ private:
 
 public:
 	bignum ();
-	bignum (bignum&);
+	bignum (const bignum&);
 	bignum (std::string&, int); //chequear
-	bignum (size_t);  //para chequear nosotros en el main
-// falta destructor //////////////
-	
-	/*
-	 *
-	 * cambiar en el cmdline las letras y funciones de opcion_t
-	 *
-	 *
-	 * agregar en el mismo la opcion -p para la precision
-	 *
-	 *
-	 */
+	bignum (int);  //para chequear nosotros en el main
 
 	~bignum();
-	bignum operator+(const bignum&);
-	bignum operator-(const bignum&);
-	bignum operator*(const bignum&);
+
+	bignum agregar_ceros(int pos, int n);
 	bignum& operator=(const bignum&);
 
+	friend bignum operator*(const bignum& a, const unsigned short b); 
+	friend bignum operator*(const bignum& a, const bignum& b); 
+	friend bignum operator+(const bignum& a, const bignum& b);
+	friend bignum operator-(const bignum& a, const bignum& b);
 
 	bignum convertir_bignum(std::string&);
 	void emitir_bignum(); //usar para chequear, despues borrarlo
 	friend std::ostream& operator<<(std::ostream&, const bignum&);
 	friend std::istream& operator>>(std::istream&, bignum&);
-
-
 };
 #endif
