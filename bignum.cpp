@@ -83,95 +83,16 @@ static void copy_array(unsigned short *dest, unsigned short *orig, int n)
         dest[i] = orig[i];
 }
 
-<<<<<<< HEAD
-static int resize(unsigned short *&a, int n) // Quita los ceros sobrantes y devuelve la nueva dim
-{    
-    int ceros = 0;
-    while(a[n - ceros - 1] == 0) ceros++;     
-=======
-static void copy_array(unsigned short *dest, unsigned short *orig, int n)
-{
-    for(int i = 0; i < n; i++)
-        dest[i] = orig[i];
-}
-
 static int resize(unsigned short *&a, int n) // Quita los ceros sobrantes y devuelve la nueva dim
 {    
     int ceros = 0;
     while((a[n - ceros - 1] == 0) && (n - ceros - 1) > 0) ceros++;     
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
     unsigned short *aux = new unsigned short[n - ceros]; //  (n- ceros) DA NEGATIVO EN ALGUNAS MULTIPLICACIONES
     copy_array(aux, a, n - ceros);
     delete[] a;
     a = aux; 
     return n - ceros;
 }
-<<<<<<< HEAD
-bignum operator+(const bignum& a, const bignum& b)
-{
-    int new_dim;
-    a.dim > b.dim ? new_dim = a.dim + 1 : new_dim = b.dim + 1;
-    bignum c(new_dim);
-    if(a.sign && !b.sign) // a < 0 y b > 0 --> c = b - a
-    {   
-        bignum aa(a);
-        aa.sign = false;
-        c = b - aa;
-        return c;
-    }
-    if(!a.sign && b.sign) // a > 0 y b < 0 --> c = a - b
-    {   
-        bignum bb(b);
-        bb.sign = false;
-        c = a - bb;
-        return c;
-    }
-    unsigned short *aa = new unsigned short[new_dim]();
-    unsigned short *bb = new unsigned short[new_dim]();
-    copy_array(aa, a.digits, a.dim);
-    copy_array(bb, b.digits, b.dim);
-    c.sign = a.sign;
-    for(int i = 0; i < new_dim; i++)
-    {
-        unsigned short carry = 0;
-        unsigned short suma = 0;
-        suma = aa[i] + bb[i] + c.digits[i];
-        carry = suma / 10; 
-        c.digits[i] = suma % 10;
-        if(i < new_dim - 1)
-            c.digits[i + 1] = carry;
-    }              
-    c.dim = resize(c.digits, new_dim);
-    delete []aa;
-    delete []bb;
-    return c;
-}
-bignum bignum::agregar_ceros(int pos, int n)// Le agrande el vector a (dim+n) xq sino eliminaba los ultimos
-{
-    unsigned short *aux = new unsigned short[dim + n]();  
-    copy_array(aux + n, digits, dim);   // le dejo n ceros al principio a aux
-    delete []digits;
-    digits = aux;
-    dim += n;
-    return *this;
-}
-bignum operator*(const bignum& a, const bignum& b) 
-{
-    int largo = a.dim + b.dim;
-
-    bignum retorno(largo);
-    for (int k = 0; k < b.dim; k++)
-    {
-        bignum multi(a.dim + 2 + k);
-        multi = a * b.digits[k];
-        multi.sign = false;    // Pongo los dos positivos, sino hace resta en vez de suma cuando hay uno negativo
-        retorno.sign = false;
-        retorno = retorno + multi.agregar_ceros(a.dim + 1, k);
-    }
-    b.sign == a.sign ? retorno.sign = false : retorno.sign = true;
-    return retorno;
-}
-=======
 
 bignum bignum::agregar_ceros(int pos, int n)// Le agrande el vector a (dim+n) xq sino eliminaba los ultimos
 {
@@ -183,7 +104,6 @@ bignum bignum::agregar_ceros(int pos, int n)// Le agrande el vector a (dim+n) xq
     return *this;
 }
 
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
 bignum& bignum::operator=(const bignum& b)
 {
     if(&b != this) 
@@ -207,8 +127,6 @@ bignum& bignum::operator=(const bignum& b)
     }    
     return *this;
 }
-<<<<<<< HEAD
-=======
 
 bignum operator*(const bignum& a, const bignum& b) 
 {
@@ -288,7 +206,6 @@ bignum operator+(const bignum& a, const bignum& b)
     return c;
 }
 
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
 static bool mayor(unsigned short *v1, size_t n1, unsigned short *v2, size_t n2)
 {
     if(n1 > n2)
@@ -302,10 +219,6 @@ static bool mayor(unsigned short *v1, size_t n1, unsigned short *v2, size_t n2)
         return false;    
     }    
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
 static bool modulo_igual(unsigned short *v1, int n1, unsigned short *v2, int n2)
 {
     if(n1 != n2) return false;
@@ -314,10 +227,6 @@ static bool modulo_igual(unsigned short *v1, int n1, unsigned short *v2, int n2)
         if(v1[i] != v2[i]) return false;
     return true;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
 static unsigned short *resta(unsigned short *a, int na, unsigned short *b, int nb, int &nc)
 {
     unsigned short *c = new unsigned short[na]();
@@ -353,16 +262,9 @@ static unsigned short *resta(unsigned short *a, int na, unsigned short *b, int n
         nc = resize(c, na);
     return c; 
 }
-<<<<<<< HEAD
-bignum operator-(const bignum& a, const bignum& b)
-{  
-    bignum c; 
-=======
-
 bignum operator-(const bignum& a, const bignum& b)
 {  
     bignum c(1); // c.digits = {0};
->>>>>>> 54606f4968f2d68fba6a6261dbd57e0265bbf70a
     int dim_c;
 
     unsigned short *aux;
