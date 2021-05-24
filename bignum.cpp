@@ -57,26 +57,6 @@ for(int i = 0; i < dim; i++)
 
 cout << ", "  << (sign ? "NEGATIVO" : "POSITIVO") << endl;
 }
-bignum operator*(const bignum& a, const unsigned short b) 
-{
-    bignum resultado(a.dim + 1);
-    int i = 0;
-    unsigned short carry = 0;
-    for (; i < a.dim; )
-    {
-        unsigned short multi = 0;
-        multi = a.digits[i] * b;
-        if(multi + carry > 9)     // Cuando era < 9 le sumaba cero
-            resultado.digits[i] = (multi + carry) % 10;
-        else
-            resultado.digits[i] = multi + carry;
-        resultado.digits[i + 1] = (multi + carry) / 10;
-        carry = 0;
-        carry = resultado.digits[i + 1];  // Le asigna el (multi + carry / 10)
-        i++;
-    }
-    return resultado;
-}
 static void copy_array(unsigned short *dest, unsigned short *orig, int n)
 {
     for(int i = 0; i < n; i++)
