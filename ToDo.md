@@ -6,12 +6,15 @@
 
 
 ---------COMMITS---------
+--27/05--
+--Explicado s = m.suffix().str();captura el "\n" (o cualquier otro caracter que no haya sido procesado por regex) de 
+la línea dejando al objeto match "ready" para la siguiente captura
+--Añadido código de error en caso en entrada inválida, el programa terminaŕa con valor no nulo como se solicita 
+  en el diseño del tp0.
 
----24/05--
---Se cambia el ejecutable del makefile a tp0 (ya que todo anda joya!). Se cambia por un clean silencioso:
-    - Opción -f ignora si el archivo existe o no. Útil cuando los .in/.out no se encuentren presentes
-    - @ --> no produce echo 
 
---Se usa randop.py para testear el código, es un programa de la cátedra de kuhn creada en python. 
-    - Se ejecuta $python randop.py 
-    - Se crearan big.in (las operaciones) y big.out (los resultados)
+
+exit code 
+formas de operar
+formas de saliuda
+formato entre operaciones
