@@ -244,7 +244,7 @@ static unsigned short *resta(unsigned short *a, int na, unsigned short *b, int n
 }
 bignum operator-(const bignum& a, const bignum& b)
 {  
-    bignum c(1); // c.digits = {0};
+    bignum c; // c.digits = {0};
     int dim_c;
 
     unsigned short *aux;
