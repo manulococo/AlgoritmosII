@@ -1,8 +1,8 @@
-# AlgoritmosII
-Tps de AlgoritmosII Uba
+## Tps de AlgoritmosII
+### Tp0
 
-Compilar---> $c++ tp0.cpp bignum.cpp cmdline.cpp precisionfija.cpp -o test <br>
-Compilar1---> make
+**$make** ---> Para compilar y crear el ejecutable.
 
-Compilar2---> $c++ tp0.cpp bignum.cpp cmdline.cpp precisionfija.cpp -o test <br>
-Exe----------> $./test -p 10 -i operaciones.txt /// obviando el -i se activa el cin 
+**$python randop.py** ---> Para crear los archivos de caso de prueba **big.in** y **big.out**
+
+**$make clean** ---> Limpia el programa.

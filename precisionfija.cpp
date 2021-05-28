@@ -12,8 +12,10 @@ precision_fija::~precision_fija(){
     
 }
 void precision_fija::captura(precision_t *precision){
+    
     string s; //se almacenará la lína 
     smatch m; // ver regex c++, se almacenará las "captura" realizadas por el regex
+    static bool entry_error=false;
 
     //validacion regex---> https://regex101.com/  consultar: ^(\d+|\-\d+|\+\d+)\s*(\+|\*|\-)\s*(\d+|\-\d+|\+\d+)$
     //\s --> matches any whitespace character (equivalent to [\r\n\t\f\v ])
@@ -56,13 +58,20 @@ void precision_fija::captura(precision_t *precision){
                 // validado desde el regex, no es posible que llegue acá;
                 break;
             }
-            s = m.suffix().str(); // se reinicia para la proxima captura
+            s = m.suffix().str(); // captura el "\n" (o cualquier otro caracter que no haya sido procesado por regex) de la 
+                                  // línea dejando al objeto match "ready" para la siguiente captura
          }
-         else *oss_<<"Entry not processed"<<endl;
+         else{ 
+            *oss_<<"Entry not processed"<<endl;
+            entry_error=true;
+         }
     } 
     if (iss_->bad()) {
         cerr << "cannot read from input stream."
         << endl;
         exit(1);
+    }
+    if(entry_error) {
+        exit(1); //el programa terminará con valor no nulo ya que hubo al menos un error en el procesamiento de operaciones.
     }
 }
