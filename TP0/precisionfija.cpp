@@ -30,19 +30,20 @@ void precision_fija::captura(precision_t *precision){
         if (std::regex_search (s,m,e)) { //true: A match was found within the string.
             //for (auto x:m) std::cout << x << ".."; realiza lo mismo que el for de abajo
             //for (unsigned i=0; i<m.size(); ++i) {
-            //    cout << "[" << m[i] << "] ";
-            //}
+            //    cout << "[" << m[i] << "] ";}
             /////////////////////////////////////////////////////////////////////////////////    
             // m.str(i)
             // En i=0 se encuentra toda el string, i=1 1er bignum, i=2 la operacion, i=3 2do bignum
             string a=m.str(1); 
             string b=m.str(3);
-
+            // el usuario puede ingresar y setear una precision, sin embargo tambien puede ingresar un string con precision > 10000, se tiene
+            // que validar, en este caso esta operación no se realizará pues sobrepasa la precisión máxima por diseño.
             int precision_a = precision->isSet ? precision->value : a.length();
             int precision_b = precision->isSet ? precision->value : b.length();
-            //cout<<precision_a<<" "<<precision_b<<endl;
+     
             bignum aa(a, precision_a);
             bignum bb(b, precision_b);
+
             switch (m.str(2)[0])
             {
             case '+':
