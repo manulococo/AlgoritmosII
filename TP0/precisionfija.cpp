@@ -43,16 +43,8 @@ void precision_fija::captura(precision_t *precision){
             bignum aa, bb;  //se declara los bignum
 
             stream_a >> aa;
-            if (stream_a.fail()){ // Se verifica el estado del stream a
-                entry_error = true;
-                iss_->setstate(std::ios_base::goodbit);
-            }
-
             stream_b >> bb;
-            if (stream_b.fail()){ // Se verifica el estado de los streams b
-                entry_error = true;
-                iss_->setstate(std::ios_base::goodbit);
-            }
+    
             switch (m.str(2)[0])
             {
             case '+':

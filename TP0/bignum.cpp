@@ -330,10 +330,6 @@ std::istream& operator>>(std::istream& iss_, bignum& in){
         string s_parse="0";
         bignum parse(s_parse, s_parse.length());
         in = parse;
-        iss_.setstate(std::ios_base::failbit);
-        //Indicates that an input operation failed to read the expected
-        //characters, or that an output operation failed to generate the
-        //desired characters.
     }
     return iss_;
     
