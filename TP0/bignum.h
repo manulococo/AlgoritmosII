@@ -5,8 +5,17 @@
 #include <sstream>
 #include <string>
 #include <stdio.h>
+#include <regex>
+#define MAX_PRECISION 10000
 
 using namespace std;
+
+struct precision_t {
+  int value;
+  bool isSet = false; // esta seteado por linea de argumento?
+} ;
+static precision_t precision;
+
 class bignum
 {
 private:

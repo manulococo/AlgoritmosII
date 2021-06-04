@@ -17,9 +17,9 @@ void precision_fija::captura(precision_t *precision){
     smatch m; // ver regex c++, se almacenará las "captura" realizadas por el regex
     static bool entry_error=false;
 
-    //validacion regex---> https://regex101.com/  consultar: ^(\d+|\-\d+|\+\d+)\s*(\+|\*|\-)\s*(\d+|\-\d+|\+\d+)$
+    //validacion regex---> https://regex101.com/  consultar: ^(\d+|\-\d+)\s*(\+|\*|\-)\s*(\d+|\-\d+)$
     //\s --> matches any whitespace character (equivalent to [\r\n\t\f\v ])
-    regex e ("^(\\d+|\\-\\d+|\\+\\d+)\\s*(\\+|\\*|\\-)\\s*(\\d+|\\-\\d+|\\+\\d+)$"); 
+    regex e ("^\\s*(\\d+|\\-\\d+)\\s*(\\+|\\*|\\-)\\s*(\\d+|\\-\\d+)\\s*$");
 
     // Recibo el flujo isstream y lo guarda en un string
     while (getline(*iss_, s)){
@@ -36,14 +36,23 @@ void precision_fija::captura(precision_t *precision){
             // En i=0 se encuentra toda el string, i=1 1er bignum, i=2 la operacion, i=3 2do bignum
             string a=m.str(1); 
             string b=m.str(3);
-            // el usuario puede ingresar y setear una precision, sin embargo tambien puede ingresar un string con precision > 10000, se tiene
-            // que validar, en este caso esta operación no se realizará pues sobrepasa la precisión máxima por diseño.
-            int precision_a = precision->isSet ? precision->value : a.length();
-            int precision_b = precision->isSet ? precision->value : b.length();
-     
-            bignum aa(a, precision_a);
-            bignum bb(b, precision_b);
+            // Los strings válidos se convierten a flujo de entrada
+            // Conversion a flujo isstream 
+            stringstream stream_a(a);
+            stringstream stream_b(b);
+            bignum aa, bb;  //se declara los bignum
 
+            stream_a >> aa;
+            if (stream_a.fail()){ // Se verifica el estado del stream a
+                entry_error = true;
+                iss_->setstate(std::ios_base::goodbit);
+            }
+
+            stream_b >> bb;
+            if (stream_b.fail()){ // Se verifica el estado de los streams b
+                entry_error = true;
+                iss_->setstate(std::ios_base::goodbit);
+            }
             switch (m.str(2)[0])
             {
             case '+':

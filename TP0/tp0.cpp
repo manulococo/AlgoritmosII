@@ -80,7 +80,6 @@ static fstream ofs;
 
 // La precision si no es especificada el ejecutar el programa, se ajustará de acuerdo a la dimensión
 // del string que se asigna a bignum
-static precision_t precision;
 
 static void
 opt_precision(string const &arg)
@@ -95,7 +94,7 @@ opt_precision(string const &arg)
     if (!arg.empty() && it == arg.end()){
         try {
             precision.value = std::stoi(arg); // transformamos a entero
-            if (precision.value > 10000){
+            if (precision.value > MAX_PRECISION){
                 throw 1; //arrojamos un int
             }
         }
